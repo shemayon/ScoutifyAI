@@ -1,33 +1,64 @@
-
-# 🔹 ScoutifyAI – Your AI-Powered Job Search Companion
-
-**ScoutifyAI** is an intelligent, end-to-end job search and recommendation agent powered by cutting-edge AI. Designed to streamline the hiring journey, ScoutifyAI helps job seekers discover the most relevant opportunities and enables recruiters to match top talent effortlessly — all with the help of smart retrieval, personalized matching, and real-time feedback loops.
-
-Whether you're a candidate looking for your dream role or a company scouting for exceptional talent, **ScoutifyAI** works behind the scenes to scout, match, and optimize every step of the process.
-
----
+# ScoutifyAI - AI-Powered Personalized Job Search Agent
 
 
 
-## 🤝 Contributing
+ScoutifyAI is an advanced AI-driven job search agent designed to revolutionize how you find career opportunities. By leveraging Large Language Models (LLMs) and vector search, ScoutifyAI provides hyper-personalized job recommendations, deep skill analysis, and actionable career insights tailored to your unique profile.
+![System Overview](./Diagram.png)
+## Key Features
 
-We welcome contributions! Please open an issue or submit a pull request if you’d like to:
-- Add a feature
-- Fix a bug
-- Improve documentation
+*   **Intelligent Resume Analysis:** ScoutifyAI extracts key technical skills and identifies the most suitable job titles from your uploaded resumes.
+*   **Hyper-Personalized Search:** Fetches job listings from global APIs and filters them using sophisticated AI logic based on your specific roles, skills, and preferences.
+*   **Semantic Matching:** Uses LLM-generated embeddings and Pinecone vector search to find jobs that truly match your profile beyond simple keywords.
+*   **Deep Fit Analysis:** Provides comprehensive job-fit scores and identifies specific skill gaps between your profile and job requirements.
+*   **Actionable Career Insights:** Aggregates skill gaps across searches to highlight high-impact areas for professional development.
+*   **Interactive Dashboard:** A Streamlit-based UI for user interaction, managing jobs profiles, and viewing results.
 
----
+## Tech Stack
 
-## 📄 License
+*   **Backend:** Python, FastAPI (Asynchronous)
+*   **Frontend:** Streamlit
+*   **AI/ML:**
+    *   OpenAI API (for LLM tasks like query generation, analysis, embeddings)
+    *   Pinecone (Vector Database for semantic search)
+*   **Database:** Supabase (PostgreSQL for user data, job details, search history)
+*   **External Data:** RapidAPI (LinkedIn Job Search API)
+*   **Containerization:** Docker
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+## Getting Started
 
----
+Follow these steps to set up and run the application locally:
 
-## 🌐 Connect
+### 1. Prerequisites
+- Python 3.8+
+- [Pinecone Account](https://www.pinecone.io/)
+- [Supabase Account](https://supabase.com/)
+- [OpenAI API Key](https://platform.openai.com/)
+- [RapidAPI Key](https://rapidapi.com/) (Subscription to "LinkedIn Job Search API" required)
 
-**Project by [Shemayon Soloman](http://www.linkedin.com/in/shemayon-soloman-b32387218)**  
-Follow for updates, roadmap discussions, and launch announcements!
+### 2. Configuration
+Copy the `.env.example` file to create your own `.env` file and fill in your API keys:
+```bash
+cp .env.example .env
+```
+> [!IMPORTANT]
+> **Pinecone Setup:** Ensure you create a Pinecone index named `job-search-tool` with a namespace named `job-list`.
 
----
+### 3. Database Setup (Supabase)
+Run the [setup_supabase.sql](setup_supabase.sql) script in your Supabase SQL Editor to create the necessary tables and seed the default user.
 
+### 4. Running with Docker Compose (Recommended)
+You can run the entire stack with a single command:
+```bash
+docker compose up --build
+```
+This will start both services:
+- Backend: `http://localhost:8000`
+- Frontend: `http://localhost:8501`
+
+## Usage (Overview)
+
+1.  Open the Streamlit interface at `http://localhost:8501`.
+2.  **Upload Resume:** Go to the Upload page to process your PDF resume.
+3.  **Search Jobs:** Define job preferences (roles, skills, location). Support for voice input is available.
+4.  **Analyze Results:** Review matched jobs, AI-generated match percentages, and skill gap insights.
+5.  **Career Insights:** View aggregated trends from your searches to see where to focus your learning.
